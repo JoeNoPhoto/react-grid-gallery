@@ -42,7 +42,7 @@ gulp.task('build-lib', function() {
                      '!./src/require.js',
                      '!./src/react-grid-gallery.bundle.js'])
         .pipe(babel({
-            presets: ['es2015', 'react']
+            presets: ['es2015', 'react', 'stage-0']
         }))
         .pipe(gulp.dest('lib'));
 });
@@ -80,7 +80,7 @@ gulp.task('browserify', function() {
         })
 //)
     ;
-    bundle.transform(babelify, {'presets': ['es2015', 'react']});
+    bundle.transform(babelify, {'presets': ['es2015', 'react', 'stage-0']});
 
     //bundle.on('update', function() {
     //    rebundle(bundle);
@@ -102,7 +102,7 @@ gulp.task('browserify', function() {
 
 
 gulp.task('build-cljs-lib', function() {
-    var bundle = browserify('./src/require.js', {
+    const bundle = browserify('./src/require.js', {
         extensions: ['.js', '.jsx'],
     });
     bundle.transform(babelify, {'presets': ['es2015', 'react']});
