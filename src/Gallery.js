@@ -295,7 +295,8 @@ Gallery.propTypes = {
             ),
             thumbnailWidth: PropTypes.number.isRequired,
             thumbnailHeight: PropTypes.number.isRequired,
-            isSelected: PropTypes.bool
+            isSelected: PropTypes.bool,
+            video: PropTypes.bool,
         })
     ).isRequired,
     id: PropTypes.string,
