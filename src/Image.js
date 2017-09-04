@@ -182,10 +182,27 @@ class Image extends Component {
                 key={"tile-viewport-"+this.props.index}
             onClick={this.props.onClick ?
                      (e) => this.props.onClick.call(this, this.props.index, e) : null}>
-                <img
-            key={"img-"+this.props.index}
-            src={this.props.item.thumbnail} title={this.props.item.caption}
-            style={this.thumbnailStyle()} />
+                      {
+                        !this.props.item.video &&
+                        <img
+                          key={`img-${this.props.index}`}
+                          src={this.props.item.thumbnail}
+                          title={this.props.item.caption}
+                          style={this.thumbnailStyle()}
+                        />
+                      }
+                      {
+                        this.props.item.video &&
+                        <video
+                          key={`img-${this.props.index}`}
+                          src={this.props.item.thumbnail}
+                          type="video/webm"
+                          title={this.props.item.caption}
+                          style={this.thumbnailStyle()}
+                          autoPlay
+                          loop
+                        />
+                      }
                 </div>
                 </div>
         );
@@ -203,7 +220,8 @@ Image.propTypes = {
     tileViewportStyle: PropTypes.func,
     thumbnailStyle: PropTypes.func,
     tagStyle: PropTypes.object,
-    customOverlay: PropTypes.element
+    customOverlay: PropTypes.element,
+    video: PropTypes.bool,
 };
 
 Image.defaultProps = {
