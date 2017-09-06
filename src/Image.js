@@ -125,84 +125,98 @@ class Image extends Component {
 
         return (
                 <div className="tile"
-            key={"tile-"+this.props.index}
-            onMouseEnter={(e) => this.setState({hover: true})}
-            onMouseLeave={(e) => this.setState({hover: false})}
-            style={{
-                margin: this.props.margin,
-                WebkitUserSelect: "none",
-                position: "relative",
-                float: "left",
-                background: "#eee",
-                padding: "0px"}}>
+                  key={"tile-"+this.props.index}
+                  onMouseEnter={(e) => this.setState({hover: true})}
+                  onMouseLeave={(e) => this.setState({hover: false})}
+                  style={{
+                    margin: this.props.margin,
+                    WebkitUserSelect: "none",
+                    position: "relative",
+                    float: "left",
+                    background: "#eee",
+                  padding: "0px"}}>
 
-                <div className="tile-icon-bar"
-            key={"tile-icon-bar-"+this.props.index}
-            style={{
-                pointerEvents: "none",
-                opacity: 1,
-                position: "absolute",
-                height: "36px",
-                width: "100%"}}>
-                {this.renderCheckButton()}
-                </div>
+                  <div className="tile-icon-bar"
+                    key={"tile-icon-bar-"+this.props.index}
+                    style={{
+                      pointerEvents: "none",
+                      opacity: 1,
+                      position: "absolute",
+                      height: "36px",
+                    width: "100%"}}>
+                    {this.renderCheckButton()}
+                  </div>
 
-                <div className="tile-bottom-bar"
-            key={"tile-bottom-bar-"+this.props.index}
-            style={{
-                padding: "2px",
-                pointerEvents: "none",
-                position: "absolute",
-                minHeight: "0px",
-                maxHeight: "160px",
-                width: "100%",
-                bottom: "0px"
-            }}>
-                {tags}
-            </div>
+                  <div className="tile-bottom-bar"
+                    key={"tile-bottom-bar-"+this.props.index}
+                    style={{
+                      padding: "2px",
+                      pointerEvents: "none",
+                      position: "absolute",
+                      minHeight: "0px",
+                      maxHeight: "160px",
+                      width: "100%",
+                      bottom: "0px"
+                    }}>
+                    {tags}
+                  </div>
 
-                {customOverlay}
+                  {customOverlay}
 
-                <div className="tile-overlay"
-            key={"tile-overlay-"+this.props.index}
-            style={{
-                pointerEvents: "none",
-                opacity: 1,
-                position: "absolute",
-                height: "100%",
-                width: "100%",
-                background: (this.state.hover
-                             && !this.props.item.isSelected
-                             && this.props.isSelectable) ?
-                    'linear-gradient(to bottom,rgba(0,0,0,0.26),transparent 56px,transparent)' : 'none'}}>
-                </div>
+                  <div className="tile-overlay"
+                    key={"tile-overlay-"+this.props.index}
+                    style={{
+                      pointerEvents: "none",
+                      opacity: 1,
+                      position: "absolute",
+                      height: "100%",
+                      width: "100%",
+                      background: (this.state.hover
+                        && !this.props.item.isSelected
+                      && this.props.isSelectable) ?
+                      'linear-gradient(to bottom,rgba(0,0,0,0.26),transparent 56px,transparent)' : 'none'}}>
+                  </div>
 
-                <div className="tile-viewport"
-            style={this.tileViewportStyle()}
-                key={"tile-viewport-"+this.props.index}
-            onClick={this.props.onClick ?
-                     (e) => this.props.onClick.call(this, this.props.index, e) : null}>
-                      {
+                  <div className="tile-viewport"
+                    style={this.tileViewportStyle()}
+                    key={"tile-viewport-"+this.props.index}
+                    onClick={this.props.onClick ?
+                      (e) => this.props.onClick.call(this, this.props.index, e) : null}>
+                    {
                         !this.props.item.video &&
-                        <img
-                          key={`img-${this.props.index}`}
-                          src={this.props.item.thumbnail}
-                          title={this.props.item.caption}
-                          style={this.thumbnailStyle()}
-                        />
-                      }
-                      {
+                      <img
+                        key={`img-${this.props.index}`}
+                        src={this.props.item.thumbnail}
+                        title={this.props.item.caption}
+                        style={this.thumbnailStyle()}
+                      />
+                    }
+                    {/* {
                         this.props.item.video &&
-                        <video
-                          key={`img-${this.props.index}`}
-                          src={this.props.item.thumbnail}
-                          type="video/webm"
-                          title={this.props.item.caption}
-                          style={this.thumbnailStyle()}
-                          autoPlay
-                          loop
-                        />
-                      }
+                      <video
+                        key={`img-${this.props.index}`}
+                        src={this.props.item.thumbnail}
+                        title={this.props.item.caption}
+                        style={this.thumbnailStyle()}
+                        autoPlay
+                        loop
+                      />
+                    } */}
+                    {
+                      this.props.item.video
+                      && <video
+                        key={`img-${this.props.index}`}
+                        poster={this.props.item.thumbnail}
+                        title={this.props.item.caption}
+                        style={this.thumbnailStyle()}
+                        autoPlay
+                        loop
+                        playsInline
+                         >
+                        <source src={this.props.item.src} type="video/webm"/>
+                        <source src={this.props.item.srcset} type="video/mp4"/>
+                      </video>
+                    }
                 </div>
                 </div>
         );
