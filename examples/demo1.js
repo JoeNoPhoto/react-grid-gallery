@@ -53,7 +53,7 @@ Demo1.propTypes = {
             src: PropTypes.string.isRequired,
             thumbnail: PropTypes.string.isRequired,
             srcset: PropTypes.array,
-            caption: PropTypes.string,
+            caption: PropTypes.node,
             thumbnailWidth: PropTypes.number.isRequired,
             thumbnailHeight: PropTypes.number.isRequired,
             isSelected: PropTypes.bool
